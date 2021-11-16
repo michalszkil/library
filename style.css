@@ -8,9 +8,24 @@ body {
 
 header, footer {
     background-color:aquamarine;
-    height: 10vh;
+    height: 50px;
 }
 
 main {
     text-align: center;
+}
+
+#add-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-text {
+    width: 200px;
+}
+
+#library-list {
+    display: flex;
+    justify-content: center;
 }

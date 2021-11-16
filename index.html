@@ -6,27 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Library</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header></header>
     <main>
         <p>Enter the required information below</p>
-        <br>
-        <label for="title">Title:</label>
-        <input id="title" name="title">
-        <br>
-        <label for="author">Author's name:</label>
-        <input id="author" name="author">
-        <br>
-        <label for="pages">Number of pages:</label>
-        <input id="pages" name="pages">
-        <br>
-        <p>Have read it?</p>
-        <label for="read-yes">Yes</label>
-        <input type="radio" id="read-yes" name="read" value="Yes">
-        <label for="read-no">No</label>
-        <input type="radio" id="read-no" name="read" value="No">
+        <div id="add-form">
+            <label for="title">Title:</label>
+            <input id="title" class="form-text" name="title">
+            <label for="author">Author's name:</label>
+            <input id="author" class="form-text" name="author">
+            <label for="pages">Number of pages:</label>
+            <input id="pages" class="form-text" name="pages">
+            <div>
+                <p>Have read it?</p>
+                <label for="read-yes">Yes</label>
+                <input type="radio" id="read-yes" name="read" value="Yes">
+                <label for="read-no">No</label>
+                <input type="radio" id="read-no" name="read" value="No">    
+            </div>
+            <button id="add">Add the book to the library</button>
+            <button id="clear-library-table">Clear table</button>
+        </div>
+        <div id="library-list">
+            <table id="library-table">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>No. of pages</th>
+                    <th>Have read it</th>
+                </tr>
+            </table>
+        </div>
     </main>
     <footer></footer>
 </body>
