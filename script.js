@@ -36,6 +36,7 @@ function displayLibrary(library) {
     for (let index = 0; index < myLibrary.length; index++) {
         const book = myLibrary[index];
         row = library_table.insertRow(-1);
+        row.setAttribute("id", index); 
 
         cell = row.insertCell(0);
         let text = document.createTextNode(book.title);
@@ -50,8 +51,19 @@ function displayLibrary(library) {
         cell.appendChild(text);
 
         cell = row.insertCell(3);
-        text = document.createTextNode(book.read ? "Tak" : "Nie");
+        text = document.createTextNode(book.read ? "Yes" : "No");
         cell.appendChild(text);
+
+        cell = row.insertCell(4);
+        cell.style.display="flex";
+        cell.style.flexDirection="column";
+        cell.style.alignItems="center";
+        button = document.createElement("button");
+        button.setAttribute("class", "delete");
+        button.addEventListener("click", function () {
+                deleteRow(index);
+            })
+        cell.appendChild(button);
     }
 }
 
@@ -60,6 +72,16 @@ function clearLibraryTable() {
     while (row = rows[1]) {
         row.parentNode.removeChild(row);
       }
+}
+
+function deleteRow(index) {
+    deleteBook(index);
+    clearLibraryTable();
+    displayLibrary();
+}
+
+function deleteBook(index) {
+    myLibrary.splice(index, 1)
 }
 
 function deleteLibrary() {
@@ -82,14 +104,21 @@ function authorIsNumber () {
     else return false;
 }
 
+const button_new_book = document.getElementById("new-book");
+const div_add_form = document.getElementById("add-form");
 const button_add = document.getElementById("add");
 const button_clear = document.getElementById("clear-library-table");
+const button_cancel = document.getElementById("cancel");
 const library_table = document.getElementById("library-table").getElementsByTagName("tbody")[0];
 form_title = document.getElementById("title");
 form_author = document.getElementById("author");
 form_pages = document.getElementById("pages");
 const read_yes = document.getElementById("read-yes");
 const read_no = document.getElementById("read-no");
+
+button_new_book.addEventListener("click", function () {
+    div_add_form.style.display="block";
+})
 
 button_add.addEventListener("click", function() {
     if (addBookToLibrary()) {
@@ -101,6 +130,10 @@ button_add.addEventListener("click", function() {
 button_clear.addEventListener("click", function() {
     deleteLibrary();
     clearLibraryTable();
+})
+
+button_cancel.addEventListener("click", function () {
+    div_add_form.style.display="none";
 })
 
 new_Book = new Book("Światło Jedi", "Charles Soule", 480, true);
