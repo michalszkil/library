@@ -55,13 +55,24 @@ function displayLibrary(library) {
         cell.appendChild(text);
 
         cell = row.insertCell(4);
-        cell.style.display="flex";
-        cell.style.flexDirection="column";
-        cell.style.alignItems="center";
+        // cell.style.display="flex";
+        // cell.style.flexDirection="column";
+        // cell.style.alignItems="center";
         button = document.createElement("button");
         button.setAttribute("class", "delete");
         button.addEventListener("click", function () {
                 deleteRow(index);
+            })
+        cell.appendChild(button);
+        
+        cell = row.insertCell(5);
+        // cell.style.display="flex";
+        // cell.style.flexDirection="column";
+        // cell.style.alignItems="center";
+        button = document.createElement("button");
+        button.setAttribute("class", "change-read-status");
+        button.addEventListener("click", function () {
+                changeReadStatus(index);
             })
         cell.appendChild(button);
     }
@@ -86,6 +97,12 @@ function deleteBook(index) {
 
 function deleteLibrary() {
     myLibrary.length = 0;
+}
+
+function changeReadStatus(index) {
+    myLibrary[index].read = !myLibrary[index].read;
+    clearLibraryTable();
+    displayLibrary();
 }
 
 function allRequiredFieldsFilled () {
@@ -118,6 +135,7 @@ const read_no = document.getElementById("read-no");
 
 button_new_book.addEventListener("click", function () {
     div_add_form.style.display="block";
+    button_new_book.style.display="none";
 })
 
 button_add.addEventListener("click", function() {
@@ -134,6 +152,8 @@ button_clear.addEventListener("click", function() {
 
 button_cancel.addEventListener("click", function () {
     div_add_form.style.display="none";
+    button_new_book.style.display="block";
+    button_new_book.style.alignContent="center";
 })
 
 new_Book = new Book("Światło Jedi", "Charles Soule", 480, true);

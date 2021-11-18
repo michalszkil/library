@@ -13,6 +13,17 @@ header, footer {
 
 main {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#new-book-div {
+    display: flex;
+    justify-content: center;
+}
+
+#new-book {
+    width: 100px;
 }
 
 #add-form {
@@ -32,6 +43,11 @@ main {
 }
 
 .delete {
+    width: 10px;
+    height: 10px;
+}
+
+.change-read-status {
     width: 10px;
     height: 10px;
 }
