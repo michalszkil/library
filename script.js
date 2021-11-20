@@ -19,8 +19,8 @@ function addBookToLibrary() {
         let read = document.getElementById("read-yes").checked;
     
         newBook = new Book(title, author, pages, read);
-    
         myLibrary.push(newBook);
+        writeToStorage();
 
         return true;
     } else {
@@ -33,6 +33,7 @@ function addBookToLibrary() {
 }
 
 function displayLibrary(library) {
+    readFromStorage();
     for (let index = 0; index < myLibrary.length; index++) {
         const book = myLibrary[index];
         row = library_table.insertRow(-1);
@@ -55,9 +56,6 @@ function displayLibrary(library) {
         cell.appendChild(text);
 
         cell = row.insertCell(4);
-        // cell.style.display="flex";
-        // cell.style.flexDirection="column";
-        // cell.style.alignItems="center";
         button = document.createElement("button");
         button.setAttribute("class", "delete");
         button.addEventListener("click", function () {
@@ -66,9 +64,6 @@ function displayLibrary(library) {
         cell.appendChild(button);
         
         cell = row.insertCell(5);
-        // cell.style.display="flex";
-        // cell.style.flexDirection="column";
-        // cell.style.alignItems="center";
         button = document.createElement("button");
         button.setAttribute("class", "change-read-status");
         button.addEventListener("click", function () {
@@ -93,14 +88,17 @@ function deleteRow(index) {
 
 function deleteBook(index) {
     myLibrary.splice(index, 1)
+    writeToStorage();
 }
 
 function deleteLibrary() {
     myLibrary.length = 0;
+    writeToStorage();
 }
 
 function changeReadStatus(index) {
     myLibrary[index].read = !myLibrary[index].read;
+    writeToStorage();
     clearLibraryTable();
     displayLibrary();
 }
@@ -119,6 +117,14 @@ function pagesIsInteger () {
 function authorIsNumber () {
     if (!isNaN(form_author.value) && form_author.value.length > 0) return true;
     else return false;
+}
+
+function writeToStorage() {
+    localStorage.library = JSON.stringify(myLibrary);
+}
+
+function readFromStorage() {
+    myLibrary = JSON.parse(localStorage.library)
 }
 
 const button_new_book = document.getElementById("new-book");
@@ -141,7 +147,13 @@ button_new_book.addEventListener("click", function () {
 button_add.addEventListener("click", function() {
     if (addBookToLibrary()) {
         clearLibraryTable();
-        displayLibrary();
+        displayLibrary();    
+        div_add_form.style.display="none";
+        button_new_book.style.display="block";
+        button_new_book.style.alignContent="center";
+        document.querySelector("#title").value = '';
+        document.querySelector("#author").value = '';
+        document.querySelector("#pages").value = '';
     }
 })
 
