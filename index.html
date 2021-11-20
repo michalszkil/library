@@ -9,13 +9,15 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <header></header>
+    <br>
+    <div id="library-name">My Library</div>
+    <br>
     <main>
         <div id="new-book-div">
             <button id="new-book">New book</button>
         </div>
         <div id="add-form">
-            <p>Enter the required information below</p>
+            <p>Enter the book information below</p>
                 <label for="title">Title:</label>
                 <input id="title" class="form-text" name="title" placeholder="Title">
                 <label for="author">Author's name:</label>
@@ -23,7 +25,7 @@
                 <label for="pages">Number of pages:</label>
                 <input id="pages" class="form-text" name="pages" placeholder="Number of pages">
                 <div>
-                    <p>Have read it?</p>
+                    <p>Have you read it?</p>
                     <label for="read-yes">Yes</label>
                     <input type="radio" id="read-yes" name="read" value="Yes">
                     <label for="read-no">No</label>
@@ -33,22 +35,26 @@
                 <button id="add">Add the book to the library</button>
                 <button id="cancel">Cancel</button>
             </div>
+            <br>
             <div id="library-list">
                 <table id="library-table">
                     <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>No. of pages</th>
-                        <th>Have read it</th>
-                        <th>Delete book</th>
-                        <th>Change read status</th>
+                        <th class="th-title">Title</th>
+                        <th class="th-author">Author</th>
+                        <th class="th-pages">No. of pages</th>
+                        <th class="th-read">Have read it</th>
+                        <th class="th-delete">Delete</th>
                     </tr>
                 </table>
             </div>
+            <br>
             <div id="bottom">
                 <button id="clear-library-table">Clear table</button>
             </div>
     </main>
-    <footer></footer>
+    <br>
+    <footer>
+        <p>Created by <a href="https://github.com/michalszkil">Michal Szkil</a></p>
+    </footer>
 </body>
 </html>

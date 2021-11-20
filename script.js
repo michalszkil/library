@@ -52,22 +52,25 @@ function displayLibrary(library) {
         cell.appendChild(text);
 
         cell = row.insertCell(3);
-        text = document.createTextNode(book.read ? "Yes" : "No");
-        cell.appendChild(text);
+        button = document.createElement("button");
+        button.setAttribute("class", "read-button");
+        button.textContent = book.read ? "Yes" : "No";
+        button.style.width = "100%";
+        button.style.height = "100%";
+        button.addEventListener("click", function () {
+                changeReadStatus(index);
+            })
+        cell.appendChild(button);
 
         cell = row.insertCell(4);
         button = document.createElement("button");
         button.setAttribute("class", "delete");
+        button.textContent = "X";
+        button.style.width = "25px";
+        button.style.height = "25px";
+        button.style.color = "red";
         button.addEventListener("click", function () {
                 deleteRow(index);
-            })
-        cell.appendChild(button);
-        
-        cell = row.insertCell(5);
-        button = document.createElement("button");
-        button.setAttribute("class", "change-read-status");
-        button.addEventListener("click", function () {
-                changeReadStatus(index);
             })
         cell.appendChild(button);
     }
@@ -124,7 +127,7 @@ function writeToStorage() {
 }
 
 function readFromStorage() {
-    myLibrary = JSON.parse(localStorage.library)
+    if(localStorage.library) myLibrary = JSON.parse(localStorage.library);
 }
 
 const button_new_book = document.getElementById("new-book");
@@ -176,5 +179,10 @@ new_Book = new Book("W ciemność", "Claudia Gray", 512, true);
 myLibrary.push(new_Book);
 new_Book = new Book("Burza nadciąga", "Cavan Scott", 416, false);
 myLibrary.push(new_Book);
+new_Book = new Book("Akademia Pana Kleksa", "Jan Brzechwa", 136, true);
+myLibrary.push(new_Book);
+new_Book = new Book("Mikroekonomia", "Hal Varian", 792, false);
+myLibrary.push(new_Book);
+
 
 displayLibrary(myLibrary);
